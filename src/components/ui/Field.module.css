@@ -63,6 +63,7 @@
 
 .input option {
   color: var(--ink-900);
+  text-shadow: none;
 }
 .input {
   flex: 1;
@@ -164,6 +165,7 @@
   width: 13px;
   height: 13px;
   color: var(--accent-ink);
+  text-shadow: none;
   opacity: 0;
   transform: scale(0.6);
   transition:
@@ -356,6 +358,7 @@
 }
 .segDark .segActive {
   color: var(--ink-900);
+  text-shadow: none;
 }
 
 /* ---------- Chip ---------- */

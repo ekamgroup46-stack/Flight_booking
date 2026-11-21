@@ -5,17 +5,58 @@ import { findAirport } from '@/services/locations/api'
 import type { Airport } from '@/services/locations/types'
 import type { Airline, CabinClass, FareDay, FareOption, Flight, FlightLeg, FlightSearchParams, FlightSearchResult, SpecialFare } from './types'
 
-/* Fictional carriers for the prototype. */
-const AIRLINES: Array<Airline & { domestic: boolean; intl: boolean }> = [
-  { code: 'VY', name: 'Vayu Air', color: '#14306b', tone: 'full', domestic: true, intl: true },
-  { code: 'SF', name: 'Saffron Air', color: '#d9561a', tone: 'full', domestic: true, intl: true },
-  { code: 'CJ', name: 'Coral Jet', color: '#e0465f', tone: 'low', domestic: true, intl: true },
-  { code: 'MN', name: 'Monsoon Airways', color: '#0f7c8c', tone: 'low', domestic: true, intl: false },
-  { code: 'IW', name: 'Indus Wings', color: '#2c7a4b', tone: 'low', domestic: true, intl: false },
-  { code: 'GW', name: 'Gulfwing', color: '#7a5230', tone: 'full', domestic: false, intl: true },
-  { code: 'LP', name: 'Lotus Pacific', color: '#6b3fa0', tone: 'full', domestic: false, intl: true },
-  { code: 'NS', name: 'Northstar Airlines', color: '#1f2d4d', tone: 'full', domestic: false, intl: true },
+/**
+ * Real carriers flying to/from India (schedules and fares here are mock data).
+ * - `weight`: rough share of departures, so results feel like the real market.
+ * - `hub`: foreign carriers connect through their home hub.
+ * - `serves`: countries an airline flies to from India (undefined = everywhere we list).
+ */
+interface Carrier extends Airline {
+  domestic: boolean
+  intl: boolean
+  weight: number
+  hub?: string
+  serves?: string[]
+  maxKm?: number
+}
+
+const AIRLINES: Carrier[] = [
+  { code: '6E', name: 'IndiGo', color: '#1b2a87', tone: 'low', domestic: true, intl: true, weight: 5, serves: ['United Arab Emirates', 'Singapore', 'Thailand', 'Maldives', 'Malaysia', 'Vietnam', 'Indonesia', 'United Kingdom'] },
+  { code: 'AI', name: 'Air India', color: '#c8102e', tone: 'full', domestic: true, intl: true, weight: 3.5 },
+  { code: 'IX', name: 'Air India Express', color: '#e25b1f', tone: 'low', domestic: true, intl: true, weight: 2, serves: ['United Arab Emirates', 'Singapore', 'Thailand', 'Malaysia'] },
+  { code: 'QP', name: 'Akasa Air', color: '#f06a2a', tone: 'low', domestic: true, intl: true, weight: 1.5, serves: ['United Arab Emirates'] },
+  { code: 'SG', name: 'SpiceJet', color: '#d7262c', tone: 'low', domestic: true, intl: true, weight: 1, serves: ['United Arab Emirates', 'Thailand'] },
+  { code: '9I', name: 'Alliance Air', color: '#1f5aa6', tone: 'low', domestic: true, intl: false, weight: 0.6, maxKm: 900 },
+  { code: 'EK', name: 'Emirates', color: '#b4141c', tone: 'full', domestic: false, intl: true, weight: 2.5, hub: 'DXB' },
+  { code: 'QR', name: 'Qatar Airways', color: '#5c0632', tone: 'full', domestic: false, intl: true, weight: 2, hub: 'DOH' },
+  { code: 'EY', name: 'Etihad Airways', color: '#9c7a46', tone: 'full', domestic: false, intl: true, weight: 1.2, hub: 'AUH' },
+  { code: 'SQ', name: 'Singapore Airlines', color: '#1d2a5d', tone: 'full', domestic: false, intl: true, weight: 1.6, hub: 'SIN', serves: ['Singapore', 'Indonesia', 'Thailand', 'Vietnam', 'Malaysia', 'Japan', 'Australia', 'Maldives'] },
+  { code: 'TG', name: 'Thai Airways', color: '#5b2c83', tone: 'full', domestic: false, intl: true, weight: 1.2, hub: 'BKK', serves: ['Thailand', 'Vietnam', 'Japan', 'Indonesia', 'Australia'] },
+  { code: 'MH', name: 'Malaysia Airlines', color: '#0a2d6e', tone: 'full', domestic: false, intl: true, weight: 1, hub: 'KUL', serves: ['Malaysia', 'Indonesia', 'Vietnam', 'Thailand', 'Australia'] },
+  { code: 'BA', name: 'British Airways', color: '#075aaa', tone: 'full', domestic: false, intl: true, weight: 1.2, hub: 'LHR', serves: ['United Kingdom', 'United States'] },
+  { code: 'LH', name: 'Lufthansa', color: '#05164d', tone: 'full', domestic: false, intl: true, weight: 1, hub: 'FRA', serves: ['France', 'United Kingdom', 'United States'] },
 ]
+
+function eligibleCarriers(A: Airport, B: Airport, intl: boolean, dist: number): Carrier[] {
+  if (!intl) return AIRLINES.filter((a) => a.domestic && (!a.maxKm || dist <= a.maxKm))
+  const foreign = A.country === 'India' ? B : A
+  return AIRLINES.filter((a) => {
+    if (!a.intl || (a.serves && !a.serves.includes(foreign.country))) return false
+    // Gulf hubs to the Gulf itself would be a silly detour (e.g. Qatar via Doha to Dubai)
+    if (a.hub && foreign.country === 'United Arab Emirates' && a.hub !== foreign.code) return false
+    return true
+  })
+}
+
+function pickWeighted(rng: ReturnType<typeof createRng>, list: Carrier[]): Carrier {
+  const total = list.reduce((s, a) => s + a.weight, 0)
+  let r = rng.next() * total
+  for (const a of list) {
+    r -= a.weight
+    if (r <= 0) return a
+  }
+  return list[list.length - 1]
+}
 
 export const AIRLINE_LIST: Airline[] = AIRLINES.map(({ code, name, color, tone }) => ({ code, name, color, tone }))
 
@@ -33,6 +74,8 @@ const TZ: Record<string, number> = {
   'United Kingdom': 0,
   'United States': -5,
   Australia: 11,
+  Qatar: 3,
+  Germany: 1,
 }
 const tz = (a: Airport) => TZ[a.country] ?? 0
 
@@ -93,7 +136,8 @@ export function generateFlights(from: string, to: string, date: string, cabin: C
   const intl = A.country !== 'India' || B.country !== 'India'
   const dist = haversineKm(A, B)
   const rng = createRng(`fl|${A.code}|${B.code}|${date}|${cabin}`)
-  const eligible = AIRLINES.filter((a) => (intl ? a.intl : a.domestic))
+  const eligible = eligibleCarriers(A, B, intl, dist)
+  if (!eligible.length) return []
   const hubs = (intl ? INTL_HUBS : DOMESTIC_HUBS).filter((c) => c !== A.code && c !== B.code)
 
   const daysAhead = Math.max(0, diffInDays(date, todayISO()))
@@ -106,14 +150,21 @@ export function generateFlights(from: string, to: string, date: string, cabin: C
   const seen = new Set<string>()
 
   for (let i = 0; i < count; i++) {
-    const airline = rng.pick(eligible)
-    let stops: number
-    if (intl) stops = dist > 5000 ? (rng.chance(0.35) ? 0 : rng.chance(0.85) ? 1 : 2) : rng.chance(0.62) ? 0 : 1
-    else stops = dist < 700 ? (rng.chance(0.92) ? 0 : 1) : rng.chance(0.74) ? 0 : 1
-    stops = Math.min(stops, hubs.length)
-
+    const airline = pickWeighted(rng, eligible)
     const departMin = round5(rng.int(5 * 60, 23 * 60 + 20))
-    const vias = rng.sample(hubs, stops).map((c) => findAirport(c)!).filter(Boolean)
+    let vias: Airport[]
+    if (airline.hub && airline.hub !== A.code && airline.hub !== B.code) {
+      // Foreign carriers connect through their home hub
+      vias = [findAirport(airline.hub)!]
+    } else {
+      let stops: number
+      if (intl) stops = dist > 5000 ? (rng.chance(0.45) ? 0 : 1) : rng.chance(0.75) ? 0 : 1
+      else stops = dist < 700 ? (rng.chance(0.92) ? 0 : 1) : rng.chance(0.74) ? 0 : 1
+      // Indian carriers connect through Indian metros
+      const own = (intl ? ['DEL', 'BOM', 'BLR', 'HYD'] : hubs).filter((c) => c !== A.code && c !== B.code)
+      vias = rng.sample(own, Math.min(stops, own.length)).map((c) => findAirport(c)!).filter(Boolean)
+    }
+    const stops = vias.length
     const points = [A, ...vias, B]
 
     // Cursor in origin-local time; converted per airport for display.

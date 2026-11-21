@@ -226,7 +226,7 @@
   color: #fff;
   background:
     radial-gradient(70% 90% at 100% 0%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 60%),
-    var(--ink-950);
+    rgba(6, 10, 19, 0.5);
   overflow: hidden;
   box-shadow: var(--sh-3);
 }

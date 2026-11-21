@@ -14,7 +14,25 @@
   transition: background var(--t);
 }
 .car:hover {
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.06);
+}
+.carPhoto {
+  margin: -6px -6px 14px;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 14px 30px -18px rgba(0, 0, 0, 0.75);
+}
+.carPhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 900ms var(--ease);
+}
+.car:hover .carPhoto img {
+  transform: scale(1.05);
 }
 .carTop {
   display: flex;

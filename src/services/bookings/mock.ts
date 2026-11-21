@@ -53,7 +53,7 @@ function seedBooking(item: CheckoutItem, travellers: Traveller[], createdDaysAgo
     item,
     travellers,
     contact: { email: 'aarav.sharma@example.com', phone: '98450 12345' },
-    cab: item.details === 'cab' ? { passengerName: 'Aarav Sharma', pickupAddress: 'Terminal 2, Arrivals Gate 4', flightNumber: 'VY 512' } : undefined,
+    cab: item.details === 'cab' ? { passengerName: 'Aarav Sharma', pickupAddress: 'Terminal 2, Arrivals Gate 4', flightNumber: '6E 512' } : undefined,
     cargo:
       item.details === 'cargo'
         ? {

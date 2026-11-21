@@ -148,6 +148,7 @@
   font-size: 11px;
   font-weight: 600;
   color: var(--accent-ink);
+  text-shadow: none;
   background: var(--accent);
 }
 .fareHead {

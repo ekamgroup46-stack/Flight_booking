@@ -56,30 +56,30 @@ function RouteMap({ quote }: { quote: CabQuoteResult }) {
     <svg viewBox={`0 0 ${W} ${H}`} className={s.map} role="img" aria-label={`Route from ${a.name}${quote.to ? ` to ${quote.to.name}` : ''}`}>
       <defs>
         <pattern id="streets" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(12)">
-          <path d="M0 20H40M20 0V40" stroke="rgba(11,18,32,.06)" strokeWidth="6" />
-          <path d="M0 20H40M20 0V40" stroke="#fff" strokeWidth="3" />
+          <path d="M0 20H40M20 0V40" stroke="rgba(0,0,0,.28)" strokeWidth="6" />
+          <path d="M0 20H40M20 0V40" stroke="rgba(255,255,255,.08)" strokeWidth="3" />
         </pattern>
       </defs>
-      <rect width={W} height={H} fill="#efeee8" />
+      <rect width={W} height={H} fill="#121a2c" />
       <rect width={W} height={H} fill="url(#streets)" />
-      <path d={`M-10 ${H * 0.78} C ${W * 0.3} ${H * 0.62}, ${W * 0.55} ${H * 0.98}, ${W + 10} ${H * 0.7}`} fill="none" stroke="#cfe0f2" strokeWidth="22" strokeLinecap="round" />
-      <ellipse cx={W * 0.78} cy={H * 0.24} rx="58" ry="34" fill="#dfead8" />
-      <ellipse cx={W * 0.18} cy={H * 0.3} rx="40" ry="26" fill="#dfead8" />
+      <path d={`M-10 ${H * 0.78} C ${W * 0.3} ${H * 0.62}, ${W * 0.55} ${H * 0.98}, ${W + 10} ${H * 0.7}`} fill="none" stroke="rgba(90,140,220,.32)" strokeWidth="22" strokeLinecap="round" />
+      <ellipse cx={W * 0.78} cy={H * 0.24} rx="58" ry="34" fill="rgba(70,160,110,.18)" />
+      <ellipse cx={W * 0.18} cy={H * 0.3} rx="40" ry="26" fill="rgba(70,160,110,.18)" />
       {quote.to ? (
         <>
-          <path d={path} fill="none" stroke="rgba(11,18,32,.18)" strokeWidth="9" strokeLinecap="round" />
+          <path d={path} fill="none" stroke="rgba(0,0,0,.4)" strokeWidth="9" strokeLinecap="round" />
           <path d={path} fill="none" stroke="var(--accent)" strokeWidth="5" strokeLinecap="round" />
-          <path d={path} fill="none" stroke="var(--ink-900)" strokeWidth="1.6" strokeDasharray="2 9" strokeLinecap="round" className={s.dash} />
+          <path d={path} fill="none" stroke="#fff" strokeWidth="1.6" strokeDasharray="2 9" strokeLinecap="round" className={s.dash} />
         </>
       ) : (
         <circle cx={x1} cy={y1} r="92" fill="color-mix(in srgb, var(--accent) 14%, transparent)" stroke="var(--accent)" strokeDasharray="4 6" strokeWidth="2" />
       )}
       <g transform={`translate(${x1} ${y1})`}>
-        <circle r="13" fill="#fff" stroke="var(--ink-900)" strokeWidth="4" />
+        <circle r="13" fill="#0d1424" stroke="#fff" strokeWidth="4" />
       </g>
       {quote.to && (
         <g transform={`translate(${x2} ${y2})`}>
-          <path d="M0 0 C -14 -16 -14 -36 0 -36 C 14 -36 14 -16 0 0Z" fill="var(--ink-900)" />
+          <path d="M0 0 C -14 -16 -14 -36 0 -36 C 14 -36 14 -16 0 0Z" fill="#fff" />
           <circle cy="-24" r="5.5" fill="var(--accent)" />
         </g>
       )}
@@ -91,7 +91,8 @@ function CabCard({ option, onBook, open, onToggle }: { option: CabOption; onBook
   return (
     <article className={cn(s.card, open && s.open)}>
       <div className={s.row}>
-        <div className={s.carArt} aria-hidden>
+        <div className={s.carArt}>
+          <img src={option.image} alt={`${option.name} — ${option.model}`} loading="lazy" />
           <span>{option.name.split(' ')[0]}</span>
         </div>
         <div className={s.info}>

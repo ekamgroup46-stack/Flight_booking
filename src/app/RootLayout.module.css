@@ -19,7 +19,9 @@
 
 /* Page enter: content rises out of a soft blur. Exit is instant so navigation never feels slow. */
 .page {
-  animation: pageIn 760ms var(--ease) both;
+  /* backwards (not both): once finished, no filter/transform lingers on the wrapper, which would
+     otherwise become a backdrop root and stop child glass from blurring the fixed photo. */
+  animation: pageIn 760ms var(--ease) backwards;
 }
 @keyframes pageIn {
   from {

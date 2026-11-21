@@ -17,9 +17,9 @@
      text automatically read correctly on glass. */
   --ink-700: rgba(255, 255, 255, 0.82);
   --ink-600: rgba(255, 255, 255, 0.74);
-  --ink-500: rgba(255, 255, 255, 0.62);
-  --ink-400: rgba(255, 255, 255, 0.5);
-  --ink-300: rgba(255, 255, 255, 0.36);
+  --ink-500: rgba(255, 255, 255, 0.7);
+  --ink-400: rgba(255, 255, 255, 0.6);
+  --ink-300: rgba(255, 255, 255, 0.5);
   --ink-200: rgba(255, 255, 255, 0.22);
   --ink-150: rgba(255, 255, 255, 0.14);
   --ink-100: rgba(255, 255, 255, 0.1);
@@ -52,14 +52,15 @@
 
   /* Surfaces & text */
   --bg: var(--ink-950);
-  --surface: linear-gradient(180deg, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.07) 60%, rgba(255, 255, 255, 0.05) 100%);
+  /* Smoky glass: a white sheen on top over a light dark tint, so text keeps contrast even over bright clouds */
+  --surface: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(12, 18, 32, 0.2) 40%, rgba(10, 15, 27, 0.3) 100%);
   --surface-solid: rgba(16, 23, 39, 0.94);
   --surface-sunk: rgba(0, 0, 0, 0.18);
-  --field: rgba(255, 255, 255, 0.08);
-  --field-hover: rgba(255, 255, 255, 0.12);
+  --field: rgba(255, 255, 255, 0.06);
+  --field-hover: rgba(255, 255, 255, 0.1);
   --text: #f4f2ed;
-  --text-2: rgba(244, 242, 237, 0.74);
-  --text-3: rgba(244, 242, 237, 0.52);
+  --text-2: rgba(244, 242, 237, 0.84);
+  --text-3: rgba(244, 242, 237, 0.68);
   --hairline: rgba(255, 255, 255, 0.1);
   --hairline-strong: rgba(255, 255, 255, 0.18);
   --focus: #8fb0ff;
@@ -93,18 +94,18 @@
   --sh-4: 0 44px 90px -28px rgba(0, 0, 0, 0.75), 0 14px 30px -14px rgba(0, 0, 0, 0.5);
 
   /* Glass content sheet that slides over the fixed backdrop */
-  --sheet-bg: linear-gradient(180deg, rgba(14, 20, 34, 0.42) 0px, rgba(10, 15, 27, 0.55) 520px, rgba(8, 12, 22, 0.62) 100%);
+  --sheet-bg: linear-gradient(180deg, rgba(10, 15, 27, 0.08) 0px, rgba(10, 15, 27, 0.14) 520px, rgba(8, 12, 22, 0.2) 100%);
   --sheet-radius: 40px;
 
   /* Glass */
-  --glass-blur: 22px;
-  --glass-light: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+  --glass-blur: 10px;
+  --glass-light: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
   --glass-dark: linear-gradient(180deg, rgba(24, 33, 54, 0.56), rgba(11, 18, 32, 0.46));
   --glass-edge: rgba(255, 255, 255, 0.24);
   --glass-edge-dark: rgba(255, 255, 255, 0.16);
   --glass-sheen: inset 0 1px 0 rgba(255, 255, 255, 0.22);
   /* Popovers, menus and dialogs: denser glass so content behind can't compete */
-  --glass-pop: linear-gradient(180deg, rgba(28, 37, 58, 0.94), rgba(15, 21, 36, 0.94));
+  --glass-pop: linear-gradient(180deg, rgba(28, 37, 58, 0.82), rgba(15, 21, 36, 0.86));
 
   /* Motion */
   --ease: cubic-bezier(0.22, 1, 0.36, 1);

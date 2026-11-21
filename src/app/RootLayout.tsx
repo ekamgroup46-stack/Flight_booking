@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Outlet, ScrollRestoration, useLocation, useMatches, useNavigation } from 'react-router'
 import { LineBundle } from '@/components/brand/Brand'
 import { Backdrop, sheetClass } from '@/components/layout/Backdrop'
+import { BottomNav } from '@/components/layout/BottomNav'
 import { Footer } from '@/components/layout/Footer'
 import { Navbar, type RouteHandle } from '@/components/layout/Navbar'
 import { ScrollUI } from '@/components/layout/ScrollUI'
@@ -42,6 +43,7 @@ export function RootLayout() {
         </div>
       </main>
       <Footer />
+      {pathname !== ROUTES.checkout && <BottomNav />}
       <ScrollUI hideTopButton={pathname === ROUTES.checkout} />
       <Toaster />
       {/* Keyed by URL: fresh page loads otherwise share the "default" key and inherit another page's scroll. */}

@@ -20,6 +20,8 @@ body {
   line-height: 1.55;
   color: var(--text);
   background: var(--bg);
+  /* Soft shadow keeps light text readable where the photo behind the glass is bright (clouds, sunset). */
+  text-shadow: 0 1px 3px rgb(3 6 14 / 0.55), 0 0 18px rgb(3 6 14 / 0.32);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -199,6 +201,16 @@ table {
 }
 [data-reveal='in'][data-reveal-media] img {
   scale: 1;
+}
+
+/* Room for the fixed mobile service dock */
+@media (max-width: 1079px) {
+  :root {
+    --bottom-nav-h: 88px;
+  }
+  body {
+    padding-bottom: var(--bottom-nav-h);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
