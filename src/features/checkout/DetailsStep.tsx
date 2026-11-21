@@ -146,7 +146,7 @@ export function DetailsStep({ errors }: { errors: Errors }) {
               </Field>
               {item.couponTags.includes('airport') && (
                 <Field label="Flight number" htmlFor="cab.flight" optional hint="We track it and adjust pickup for delays">
-                  <Input id="cab.flight" value={draft.cab.flightNumber} onChange={(e) => setCab({ flightNumber: e.target.value.toUpperCase() })} placeholder="e.g. VY 512" />
+                  <Input id="cab.flight" value={draft.cab.flightNumber} onChange={(e) => setCab({ flightNumber: e.target.value.toUpperCase() })} placeholder="e.g. 6E 512" />
                 </Field>
               )}
             </div>

@@ -19,6 +19,8 @@ export interface CabOption {
   category: CabCategory
   name: string
   model: string
+  /** Representative photo of the category */
+  image: string
   seats: number
   bags: number
   fuel: 'Petrol' | 'CNG' | 'Diesel' | 'Electric'

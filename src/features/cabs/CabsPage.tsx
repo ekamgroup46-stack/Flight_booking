@@ -15,12 +15,12 @@ import { CabSearchForm } from './CabSearchForm'
 import c from './Cabs.module.css'
 
 const FLEET = [
-  { name: 'Mini', model: 'WagonR, Celerio or similar', seats: 4, bags: 1, rate: 11.5, note: 'Quick city hops' },
-  { name: 'Sedan', model: 'Dzire, Aura or similar', seats: 4, bags: 2, rate: 13.5, note: 'Airport runs, two suitcases' },
-  { name: 'Electric', model: 'Tigor EV or similar', seats: 4, bags: 2, rate: 14, note: 'Quiet, zero tailpipe', eco: true },
-  { name: 'SUV', model: 'Ertiga, Carens or similar', seats: 6, bags: 3, rate: 16.5, note: 'Families & weekend trips' },
-  { name: 'SUV+', model: 'Innova Crysta or similar', seats: 6, bags: 4, rate: 20.5, note: 'Long highways in comfort' },
-  { name: 'Luxury', model: 'Camry, E-Class or similar', seats: 4, bags: 3, rate: 34, note: 'Chauffeur-driven occasions' },
+  { name: 'Mini', image: '/images/cabs/mini.webp', model: 'WagonR, Celerio or similar', seats: 4, bags: 1, rate: 11.5, note: 'Quick city hops' },
+  { name: 'Sedan', image: '/images/cabs/sedan.webp', model: 'Dzire, Aura or similar', seats: 4, bags: 2, rate: 13.5, note: 'Airport runs, two suitcases' },
+  { name: 'Electric', image: '/images/cabs/ev.webp', model: 'Tigor EV or similar', seats: 4, bags: 2, rate: 14, note: 'Quiet, zero tailpipe', eco: true },
+  { name: 'SUV', image: '/images/cabs/suv.webp', model: 'Ertiga, Carens or similar', seats: 6, bags: 3, rate: 16.5, note: 'Families & weekend trips' },
+  { name: 'SUV+', image: '/images/cabs/suvplus.webp', model: 'Innova Crysta or similar', seats: 6, bags: 4, rate: 20.5, note: 'Long highways in comfort' },
+  { name: 'Luxury', image: '/images/cabs/premium.webp', model: 'Camry, E-Class or similar', seats: 4, bags: 3, rate: 34, note: 'Chauffeur-driven occasions' },
 ]
 
 const SAFETY = [
@@ -70,6 +70,9 @@ export default function CabsPage() {
           <div className={c.fleet}>
             {FLEET.map((f, i) => (
               <div key={f.name} className={c.car} data-reveal style={{ ['--reveal-delay' as string]: `${i * 50}ms` }}>
+                <div className={c.carPhoto}>
+                  <img src={f.image} alt={`${f.name} — ${f.model}`} loading="lazy" />
+                </div>
                 <div className={c.carTop}>
                   <span className={c.carName}>{f.name}</span>
                   {f.eco && (

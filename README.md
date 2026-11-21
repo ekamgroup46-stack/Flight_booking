@@ -61,7 +61,8 @@ interface accent re-points to that line on each service page (`[data-service]` i
 - **Type:** Geist (UI), Instrument Serif italic (editorial accents only), Geist Mono (times, codes, PNRs) — self-hosted via Fontsource.
 - **Motifs:** route lines with station dots, the five-line bundle, split-flap characters, ticket stubs with notches (CSS masks).
 - **Fixed backdrop + glass:** one flight photograph (`HERO_IMAGE` in `config/services.ts`) is fixed behind the whole site (`components/layout/Backdrop.tsx`). Heroes are transparent over it; page content rides on a glossy frosted `GlassSheet`. A pre-blurred copy of the photo fades in as the sheet rises, so the glass looks frosted without per-frame backdrop blur.
-- **Surfaces:** cards use a glossy `--surface` gradient with a specular top edge (`--sh-*` tokens); warm paper + ink neutrals; live frosted glass only where something sits directly over the photo (search consoles, nav, booking summary).
+- **Dark glass theme:** no opaque white backgrounds. Text, hairlines and the light neutral ramp (`--ink-50…700`) are translucent white; cards use the glossy `--surface` gradient with specular edges (`--sh-*`); fields use `--field`; popovers, menus and dialogs use denser `--glass-pop`. The pearl `primary` button is the one bright control.
+- **Mobile dock:** below 1080px the five services live in a fixed glossy dock at the bottom of the screen (`components/layout/BottomNav`); `--bottom-nav-h` reserves space for it.
 - Components live in `src/components` (UI kit, brand, layout, search, results). Tokens in `src/styles/tokens.css`.
 - **Layout:** fluid full-width pages with a 10% side gap from 1280px up, tapering smoothly to 20px on phones (`--gutter` in `tokens.css`).
 - **Motion:** page-enter transitions with a five-line sweep (`app/RootLayout`), inertial smooth scrolling via Lenis (`lib/smoothScroll.ts`, paused while dialogs are open), scroll-driven hero parallax, media and section reveals (`data-reveal`, `data-reveal-media`), a reading-progress line and a back-to-top button (`components/layout/ScrollUI`).
@@ -126,5 +127,5 @@ During local development you can proxy `/api` to your backend in `vite.config.ts
 
 - Replace placeholder brand contact details in `src/config/app.config.ts`.
 - Policy pages (`src/content/legal.ts`) are template copy — have them reviewed by legal counsel.
-- Carriers, operators and fares in the mock data are fictional/illustrative; the QR on tickets is decorative.
+- Airlines are real carrier names, but every schedule, flight number and fare is mock data; bus operators are fictional; the QR on tickets is decorative.
 - Photography is from [Unsplash](https://unsplash.com) under the Unsplash License, stored in `public/images/`.

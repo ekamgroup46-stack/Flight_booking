@@ -25,15 +25,15 @@
 }
 /* Pre-blurred copy: rendered once (the layer never moves), faded in with --sink. */
 .soft {
-  filter: blur(30px) saturate(1.3) brightness(0.9);
-  transform: scale(1.12);
+  filter: blur(4px) saturate(1.15) brightness(0.92);
+  transform: scale(1.02);
   opacity: var(--sink, 0);
   transition: opacity 420ms var(--ease);
 }
 .tint {
   position: absolute;
   inset: 0;
-  background: rgb(6 10 19 / calc(0.08 + var(--sink, 0) * 0.22));
+  background: rgb(6 10 19 / calc(0.04 + var(--sink, 0) * 0.06));
   transition: background-color 420ms var(--ease);
 }
 /* Warm ambient light from the sunset side of the photo */
@@ -58,8 +58,8 @@
   border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
   background: var(--sheet-bg);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
     0 -28px 70px -26px rgba(3, 6, 14, 0.55);
   isolation: isolate;
   /* Keeps page-level glows inside the rounded edge; clip (not hidden) so sticky still works. */
@@ -74,8 +74,8 @@
   height: 260px;
   border-radius: inherit;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0) 100%),
-    linear-gradient(100deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.35) 50%, rgba(255, 255, 255, 0) 70%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0) 100%),
+    linear-gradient(100deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0) 70%);
   /* Feather the gloss out so it never ends in a visible edge */
   -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent 100%);
   mask-image: linear-gradient(180deg, #000 30%, transparent 100%);
@@ -89,6 +89,7 @@
 @media print {
   .sheet {
     background: #fff;
+    color: #000;
     box-shadow: none;
   }
 }

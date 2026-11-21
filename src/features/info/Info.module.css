@@ -218,7 +218,7 @@
   color: #fff;
   background:
     radial-gradient(90% 70% at 100% 0%, rgba(47, 107, 255, 0.25), transparent 60%),
-    var(--ink-950);
+    rgba(6, 10, 19, 0.5);
   box-shadow: var(--sh-3);
 }
 .channels h2 {
@@ -373,7 +373,7 @@
   padding: clamp(28px, 5vw, 56px);
   border-radius: 30px;
   color: #fff;
-  background: var(--ink-950);
+  background: rgba(6, 10, 19, 0.5);
   box-shadow: var(--sh-3);
 }
 .linesCard h2 {

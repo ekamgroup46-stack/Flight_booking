@@ -47,8 +47,8 @@
 .glass {
   color: #fff;
   background: rgba(255, 255, 255, 0.14);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
 }
 
@@ -261,6 +261,7 @@
 .done .stepDot {
   background: var(--accent);
   color: var(--accent-ink);
+  text-shadow: none;
   box-shadow: none;
 }
 .current .stepDot {

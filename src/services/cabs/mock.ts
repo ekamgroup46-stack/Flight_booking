@@ -7,6 +7,7 @@ import type { CabCategory, CabOption, CabQuoteResult, CabSearchParams, RentalPac
 interface CategoryMeta {
   name: string
   model: string
+  image: string
   seats: number
   bags: number
   fuel: CabOption['fuel']
@@ -16,13 +17,13 @@ interface CategoryMeta {
 }
 
 const CATEGORIES: Record<CabCategory, CategoryMeta> = {
-  mini: { name: 'Mini', model: 'WagonR, Celerio or similar', seats: 4, bags: 1, fuel: 'CNG', perKm: 11.5, rentalFactor: 1, rating: 4.5 },
-  sedan: { name: 'Sedan', model: 'Dzire, Aura or similar', seats: 4, bags: 2, fuel: 'Petrol', perKm: 13.5, rentalFactor: 1.16, rating: 4.7 },
-  ev: { name: 'Electric Sedan', model: 'Tigor EV, e-Verito or similar', seats: 4, bags: 2, fuel: 'Electric', perKm: 14, rentalFactor: 1.2, rating: 4.8 },
-  suv: { name: 'SUV', model: 'Ertiga, Carens or similar', seats: 6, bags: 3, fuel: 'Diesel', perKm: 16.5, rentalFactor: 1.45, rating: 4.6 },
-  suvplus: { name: 'SUV+', model: 'Innova Crysta or similar', seats: 6, bags: 4, fuel: 'Diesel', perKm: 20.5, rentalFactor: 1.8, rating: 4.8 },
-  premium: { name: 'Luxury', model: 'Camry, E-Class or similar', seats: 4, bags: 3, fuel: 'Petrol', perKm: 34, rentalFactor: 3, rating: 4.9 },
-  tempo: { name: 'Tempo Traveller', model: '12-seater Force Traveller', seats: 12, bags: 8, fuel: 'Diesel', perKm: 26, rentalFactor: 2.4, rating: 4.4 },
+  mini: { name: 'Mini', model: 'WagonR, Celerio or similar', image: '/images/cabs/mini.webp', seats: 4, bags: 1, fuel: 'CNG', perKm: 11.5, rentalFactor: 1, rating: 4.5 },
+  sedan: { name: 'Sedan', model: 'Dzire, Aura or similar', image: '/images/cabs/sedan.webp', seats: 4, bags: 2, fuel: 'Petrol', perKm: 13.5, rentalFactor: 1.16, rating: 4.7 },
+  ev: { name: 'Electric Sedan', model: 'Tigor EV, e-Verito or similar', image: '/images/cabs/ev.webp', seats: 4, bags: 2, fuel: 'Electric', perKm: 14, rentalFactor: 1.2, rating: 4.8 },
+  suv: { name: 'SUV', model: 'Ertiga, Carens or similar', image: '/images/cabs/suv.webp', seats: 6, bags: 3, fuel: 'Diesel', perKm: 16.5, rentalFactor: 1.45, rating: 4.6 },
+  suvplus: { name: 'SUV+', model: 'Innova Crysta or similar', image: '/images/cabs/suvplus.webp', seats: 6, bags: 4, fuel: 'Diesel', perKm: 20.5, rentalFactor: 1.8, rating: 4.8 },
+  premium: { name: 'Luxury', model: 'Camry, E-Class or similar', image: '/images/cabs/premium.webp', seats: 4, bags: 3, fuel: 'Petrol', perKm: 34, rentalFactor: 3, rating: 4.9 },
+  tempo: { name: 'Tempo Traveller', model: '12-seater Force Traveller', image: '/images/cabs/tempo.webp', seats: 12, bags: 8, fuel: 'Diesel', perKm: 26, rentalFactor: 2.4, rating: 4.4 },
 }
 
 const RENTAL_BASE: Record<RentalPackage, [number, number, number]> = {
@@ -88,6 +89,7 @@ export function mockCabQuote(p: CabSearchParams): CabQuoteResult {
       category: cat,
       name: m.name,
       model: m.model,
+      image: m.image,
       seats: m.seats,
       bags: m.bags,
       fuel: m.fuel,

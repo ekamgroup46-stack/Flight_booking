@@ -190,6 +190,7 @@
 }
 .addonOn .addonCheck {
   color: var(--accent-ink);
+  text-shadow: none;
   background: var(--accent);
   box-shadow: none;
 }
@@ -419,8 +420,8 @@
   top: calc(var(--nav-h) + 16px);
   border-radius: var(--r-xl);
   background: var(--glass-light);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  backdrop-filter: blur(10px) saturate(160%);
   box-shadow:
     var(--glass-sheen),
     0 0 0 1px rgba(11, 18, 32, 0.06),
@@ -591,8 +592,8 @@
   place-items: center;
   padding: 24px;
   background: rgba(6, 10, 19, 0.6);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   animation: fade 200ms ease;
 }
 @keyframes fade {
@@ -637,8 +638,8 @@
     overflow-y: auto;
     border-radius: 22px 22px 0 0;
     background: var(--glass-pop);
-    -webkit-backdrop-filter: blur(24px) saturate(160%);
-    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(10px) saturate(160%);
+    backdrop-filter: blur(10px) saturate(160%);
   }
   .summaryToggle {
     display: flex;

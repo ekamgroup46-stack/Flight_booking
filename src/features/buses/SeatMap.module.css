@@ -103,6 +103,7 @@
 }
 .selected {
   color: var(--accent-ink);
+  text-shadow: none;
   background: var(--accent);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.35),
