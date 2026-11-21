@@ -1,0 +1,689 @@
+/* ==========================================================================
+   Search slab — a row of segmented fields on a white surface.
+   ========================================================================== */
+.slab {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  padding: 6px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 22px 44px -26px rgba(0, 0, 0, 0.6);
+}
+
+.cell {
+  position: relative;
+  grid-column: span var(--span);
+  min-width: 0;
+}
+.cell + .cell::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 16px;
+  bottom: 16px;
+  width: 1px;
+  background: var(--hairline);
+}
+.cell > div,
+.cell > label {
+  height: 100%;
+}
+
+.segment {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 78px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  text-align: left;
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    background-color var(--t-fast) var(--ease),
+    box-shadow var(--t) var(--ease);
+}
+.segment:hover {
+  background: var(--ink-50);
+}
+.segActive,
+.segActive:hover {
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    inset 0 0 0 1.5px var(--accent),
+    0 10px 24px -14px var(--accent-glow);
+  z-index: 1;
+}
+.segInvalid {
+  box-shadow: inset 0 0 0 1.5px var(--bad);
+}
+.segLabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.segValue {
+  max-width: 100%;
+  margin-top: 5px;
+  overflow: hidden;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.028em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.segPlaceholder {
+  font-weight: 500;
+  color: var(--text-3);
+}
+.segSub {
+  max-width: 100%;
+  margin-top: 3px;
+  overflow: hidden;
+  font-size: 12.5px;
+  color: var(--text-3);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Native select overlay */
+.selectSeg {
+  position: relative;
+}
+.nativeSelect option {
+  color: var(--ink-900);
+}
+.nativeSelect {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+  font-size: 16px;
+}
+.selectSeg:focus-within {
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+/* Inline input segment */
+.inputSeg {
+  cursor: text;
+}
+.inputSeg:focus-within {
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.inputRow {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  width: 100%;
+  margin-top: 3px;
+}
+.segInput {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.028em;
+  color: var(--text);
+  -moz-appearance: textfield;
+}
+.segInput::-webkit-outer-spin-button,
+.segInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.segInput::placeholder {
+  color: var(--text-3);
+  font-weight: 500;
+}
+.inputSuffix {
+  font-size: 13px;
+  color: var(--text-3);
+}
+
+/* Paired location cells */
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.pair::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 16px;
+  bottom: 16px;
+  width: 1px;
+  background: var(--hairline);
+}
+.swap {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: var(--text);
+  background: linear-gradient(180deg, rgba(48, 58, 82, 0.98), rgba(28, 36, 56, 0.98));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 4px 12px -4px rgba(0, 0, 0, 0.5);
+  transform: translate(-50%, -50%);
+  transition: transform 420ms var(--ease);
+}
+.swap:hover {
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+.swap svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Submit */
+.submitCell {
+  padding-left: 6px;
+}
+.submitCell::before {
+  display: none;
+}
+.submit {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  min-height: 78px;
+  padding: 0 22px;
+  border-radius: 14px;
+  font-size: 16.5px;
+  font-weight: 620;
+  letter-spacing: -0.015em;
+  color: var(--accent-ink);
+  background-color: var(--accent);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.02) 55%, rgba(0, 0, 0, 0.05));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.14),
+    0 14px 28px -14px var(--accent-glow);
+  transition:
+    transform var(--t-fast) var(--ease),
+    box-shadow var(--t) var(--ease),
+    filter var(--t);
+  overflow: hidden;
+}
+.submit::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.28) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 700ms var(--ease);
+}
+.submit:hover::after {
+  transform: translateX(120%);
+}
+.submit:hover {
+  filter: brightness(1.04);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.14),
+    0 20px 36px -14px var(--accent-glow);
+}
+.submit:active {
+  transform: scale(0.985);
+}
+.submitIcon {
+  width: 19px;
+  height: 19px;
+}
+.submitArrow {
+  width: 18px;
+  height: 18px;
+  margin-left: -4px;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition:
+    opacity var(--t) var(--ease),
+    transform var(--t) var(--ease);
+}
+.submit:hover .submitArrow {
+  opacity: 1;
+  transform: none;
+}
+
+/* Compact (results "modify" bar) */
+.compact {
+  padding: 4px;
+  border-radius: 16px;
+}
+.compact .segment,
+.compact .submit {
+  min-height: 60px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.compact .segValue,
+.compact .segInput {
+  font-size: 16px;
+}
+.compact .segSub {
+  display: none;
+}
+.submitCompact {
+  font-size: 15px;
+}
+
+/* Options row above the slab */
+.optionRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-bottom: 12px;
+}
+
+.formError {
+  margin-top: 10px;
+  font-size: 13.5px;
+  font-weight: 550;
+  color: #ffd2cc;
+}
+:global([data-surface='light']) .formError {
+  color: var(--bad);
+}
+
+/* ---------- Location panel ---------- */
+.locPanel {
+  width: 400px;
+  padding: 10px;
+}
+.locSearch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: var(--ink-50);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+}
+.locSearch:focus-within {
+  background: var(--field-hover);
+  box-shadow:
+    inset 0 0 0 1.5px var(--accent),
+    0 0 0 4px var(--accent-soft);
+}
+.locSearch svg {
+  width: 18px;
+  height: 18px;
+  color: var(--text-3);
+}
+.locSearch input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-size: 15.5px;
+}
+.locSpinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--ink-150);
+  border-top-color: var(--accent);
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.locHeading {
+  margin: 14px 10px 6px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.locList {
+  max-height: 340px;
+  overflow-y: auto;
+}
+.locOption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 10px;
+  border-radius: 11px;
+  cursor: pointer;
+}
+.locActive {
+  background: var(--ink-50);
+}
+.locChosen .locText strong {
+  color: var(--accent-text);
+}
+.locIcon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 36px;
+  border-radius: 9px;
+  background: var(--field);
+  box-shadow: inset 0 0 0 1px var(--hairline-strong);
+  color: var(--text-2);
+}
+.locIcon b {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+.locIcon svg {
+  width: 17px;
+  height: 17px;
+}
+.locText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.locText strong {
+  font-size: 15px;
+  font-weight: 580;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.locText em {
+  font-style: normal;
+  font-size: 12.5px;
+  color: var(--text-3);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.locGroup {
+  font-size: 11px;
+  color: var(--text-3);
+}
+.locEmpty {
+  padding: 18px 10px;
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+/* ---------- Date panel & calendar ---------- */
+.dateTrigger {
+  position: relative;
+  height: 100%;
+}
+.clearDate {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: var(--text-3);
+  background: var(--ink-50);
+}
+.clearDate:hover {
+  color: var(--text);
+  background: var(--ink-100);
+}
+.clearDate svg {
+  width: 13px;
+  height: 13px;
+}
+.datePanel {
+  padding: 18px 18px 14px;
+}
+.quickPicks {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.dateFooter {
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--hairline);
+  font-size: 12.5px;
+  color: var(--text-3);
+}
+.calendar {
+  position: relative;
+}
+.calNav {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.calNav button {
+  pointer-events: auto;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--text);
+  box-shadow: inset 0 0 0 1px var(--hairline-strong);
+  background: var(--field);
+}
+.calNav button:hover:not(:disabled) {
+  background: var(--ink-50);
+}
+.calNav button:disabled {
+  opacity: 0.3;
+}
+.calNav svg {
+  width: 16px;
+  height: 16px;
+}
+.calMonths {
+  display: flex;
+  gap: 28px;
+}
+.calMonth {
+  width: 294px;
+}
+.calTitle {
+  height: 26px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.calGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.calWeekday {
+  padding-bottom: 6px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-3);
+}
+.calDay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 46px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 520;
+  color: var(--text);
+  transition: background var(--t-fast);
+}
+.calDay em {
+  margin-top: 1px;
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+.calDay .calCheap {
+  color: var(--ok);
+  font-weight: 650;
+}
+.calDay:hover:not(:disabled) {
+  background: var(--ink-50);
+}
+.calDay:disabled {
+  color: var(--ink-200);
+  cursor: default;
+}
+.calToday span {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--accent);
+}
+.calInRange {
+  background: var(--accent-soft);
+  border-radius: 4px;
+}
+.calEdge {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.calSelected,
+.calSelected:hover:not(:disabled) {
+  color: var(--accent-ink);
+  background: var(--accent);
+  box-shadow: 0 6px 14px -8px var(--accent-glow);
+}
+.calSelected em,
+.calSelected .calCheap {
+  color: inherit;
+  opacity: 0.85;
+}
+
+/* ---------- Travellers panel ---------- */
+.paxPanel {
+  width: 340px;
+  padding: 6px 18px 16px;
+}
+.paxCabins {
+  padding-top: 12px;
+  border-top: 1px solid var(--hairline);
+}
+.paxHeading {
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+.chipWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.paxFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .slab {
+    gap: 6px;
+    padding: 8px;
+  }
+  .cell {
+    grid-column: span var(--span-md);
+  }
+  .cell + .cell::before,
+  .pair::after {
+    display: none;
+  }
+  .segment {
+    background: var(--ink-50);
+  }
+  .segment:hover {
+    background: var(--ink-100);
+  }
+  .pair {
+    gap: 6px;
+  }
+  .submitCell {
+    padding-left: 0;
+  }
+  .submit {
+    min-height: 60px;
+  }
+}
+@media (max-width: 640px) {
+  .cell {
+    grid-column: span var(--span-sm);
+  }
+  .pair {
+    grid-template-columns: 1fr;
+  }
+  .swap {
+    left: auto;
+    right: 18px;
+    transform: translateY(-50%) rotate(90deg);
+  }
+  .swap:hover {
+    transform: translateY(-50%) rotate(270deg);
+  }
+  .segment {
+    min-height: 68px;
+    padding: 10px 14px;
+  }
+  .segValue,
+  .segInput {
+    font-size: 17px;
+  }
+  .locPanel,
+  .paxPanel {
+    width: auto;
+  }
+  .calMonth {
+    width: 100%;
+  }
+}

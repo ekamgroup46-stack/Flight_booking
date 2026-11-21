@@ -1,0 +1,116 @@
+.page {
+  min-height: 100vh;
+}
+.hero {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  min-height: max(640px, 86svh);
+  padding: calc(var(--nav-h) + 96px) 0 clamp(24px, 4vh, 44px);
+  color: #fff;
+}
+/* Transparent: the fixed site backdrop shows through. */
+.media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .copy {
+      animation: recede linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 70vh;
+    }
+  }
+}
+@keyframes recede {
+  to {
+    opacity: 0.15;
+    translate: 0 -40px;
+  }
+}
+.scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(6, 10, 19, 0.78) 0%, rgba(6, 10, 19, 0.42) 50%, rgba(6, 10, 19, 0.15) 100%),
+    linear-gradient(0deg, rgba(6, 10, 19, 0.6), rgba(6, 10, 19, 0) 50%),
+    linear-gradient(180deg, rgba(6, 10, 19, 0.5), rgba(6, 10, 19, 0) 25%);
+}
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 40px;
+}
+.crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  animation: rise 800ms var(--ease) both;
+}
+.rule {
+  width: 26px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+.blurb {
+  font-weight: 450;
+  color: rgba(255, 255, 255, 0.75);
+}
+.title {
+  margin-top: 20px;
+  font-size: clamp(42px, 5.6vw, 84px);
+  font-weight: 600;
+  line-height: 0.96;
+  letter-spacing: -0.055em;
+  animation: rise 900ms 80ms var(--ease) both;
+}
+.title :global(.serif-i) {
+  color: #ffdcc4;
+  letter-spacing: -0.02em;
+}
+.aside {
+  margin-top: 22px;
+  animation: rise 900ms 160ms var(--ease) both;
+}
+.panel {
+  position: relative;
+  padding: 16px 16px 16px;
+  border-radius: 26px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.08));
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(24px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+    0 44px 90px -40px rgba(3, 6, 14, 0.7);
+  animation: rise 900ms 220ms var(--ease) both;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+@media (max-width: 640px) {
+  .hero {
+    min-height: auto;
+    padding: calc(var(--nav-h) + 36px) 0 18px;
+  }
+  .panel {
+    padding: 10px;
+    border-radius: 20px;
+  }
+  .blurb {
+    display: none;
+  }
+}

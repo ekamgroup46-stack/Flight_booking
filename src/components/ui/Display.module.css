@@ -1,0 +1,337 @@
+/* ---------- Badge ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 24px;
+  padding: 0 9px;
+  border-radius: var(--r-pill);
+  font-size: 12px;
+  font-weight: 560;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+}
+.badge svg {
+  width: 13px;
+  height: 13px;
+}
+.neutral {
+  color: var(--text-2);
+  background: var(--ink-50);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+}
+.accent {
+  color: var(--accent-text);
+  background: var(--accent-soft);
+}
+.ok {
+  color: var(--ok);
+  background: var(--ok-soft);
+}
+.warn {
+  color: var(--warn);
+  background: var(--warn-soft);
+}
+.bad {
+  color: var(--bad);
+  background: var(--bad-soft);
+}
+.dark {
+  color: #fff;
+  background: var(--ink-900);
+}
+.outline {
+  color: var(--text-2);
+  box-shadow: inset 0 0 0 1px var(--hairline-strong);
+}
+.glass {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+}
+
+/* ---------- Rating ---------- */
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 7px;
+  font-size: 12.5px;
+  font-weight: 650;
+  color: #fff;
+}
+.rating svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+.rating em {
+  font-style: normal;
+  font-weight: 450;
+  opacity: 0.8;
+  margin-left: 2px;
+}
+.rateHigh {
+  background: #0b8a5f;
+}
+.rateMid {
+  background: #3f8f3a;
+}
+.rateLow {
+  background: #b26a00;
+}
+
+/* ---------- Tabs ---------- */
+.tabs {
+  position: relative;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--hairline);
+}
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 46px;
+  padding: 0 14px;
+  font-size: 14.5px;
+  font-weight: 520;
+  color: var(--text-3);
+  white-space: nowrap;
+  transition: color var(--t-fast);
+}
+.tab svg {
+  width: 17px;
+  height: 17px;
+}
+.tab:hover {
+  color: var(--text);
+}
+.tab[aria-selected='true'] {
+  color: var(--text);
+  font-weight: 600;
+}
+.tabMeta {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 1px 7px;
+  border-radius: 99px;
+  background: var(--ink-50);
+  color: var(--text-2);
+}
+.indicator {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--accent);
+  transition:
+    transform 380ms var(--ease),
+    width 380ms var(--ease);
+}
+.tabsDark {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+.tabsDark .tab {
+  color: rgba(255, 255, 255, 0.6);
+}
+.tabsDark .tab:hover,
+.tabsDark .tab[aria-selected='true'] {
+  color: #fff;
+}
+
+/* ---------- Accordion ---------- */
+.accordion {
+  border-top: 1px solid var(--hairline);
+}
+.accItem {
+  border-bottom: 1px solid var(--hairline);
+}
+.accItem h3 {
+  font-size: inherit;
+  letter-spacing: normal;
+}
+.accTrigger {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 2px;
+  text-align: left;
+  font-size: 16.5px;
+  font-weight: 560;
+  letter-spacing: -0.015em;
+  color: var(--text);
+}
+.accTrigger svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--text-3);
+  transition: transform var(--t) var(--ease);
+}
+.accOpen .accTrigger svg {
+  transform: rotate(180deg);
+}
+.accPanel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 360ms var(--ease);
+}
+.accPanel > div {
+  overflow: hidden;
+}
+.accOpen .accPanel {
+  grid-template-rows: 1fr;
+}
+.accContent {
+  padding: 0 40px 22px 2px;
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.65;
+}
+
+/* ---------- Stepper (stations on a line) ---------- */
+.stepper {
+  display: flex;
+  align-items: center;
+  counter-reset: step;
+}
+.step {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+.step:last-child {
+  flex: 0 0 auto;
+}
+.step:not(:last-child)::after {
+  content: '';
+  flex: 1;
+  height: 3px;
+  margin: 0 10px;
+  border-radius: 3px;
+  background: var(--ink-150);
+}
+.done:not(:last-child)::after {
+  background: var(--accent);
+}
+.stepBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+  font-weight: 550;
+  color: var(--text-3);
+}
+.stepBtn:disabled {
+  cursor: default;
+}
+.stepDot {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-size: 12.5px;
+  font-weight: 650;
+  background: var(--field);
+  box-shadow: inset 0 0 0 2px var(--ink-200);
+}
+.stepDot svg {
+  width: 13px;
+  height: 13px;
+}
+.done .stepBtn,
+.current .stepBtn {
+  color: var(--text);
+}
+.done .stepDot {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: none;
+}
+.current .stepDot {
+  color: var(--text);
+  box-shadow:
+    inset 0 0 0 3px var(--accent),
+    0 0 0 5px var(--accent-soft);
+}
+@media (max-width: 640px) {
+  .stepLabel {
+    display: none;
+  }
+  .current .stepLabel {
+    display: inline;
+  }
+}
+
+/* ---------- Copy ---------- */
+.copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 11px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 560;
+  color: var(--text);
+  background: var(--field);
+  box-shadow: inset 0 0 0 1px var(--hairline-strong);
+  transition:
+    background var(--t-fast),
+    color var(--t-fast);
+}
+.copy svg {
+  width: 14px;
+  height: 14px;
+}
+.copy:hover {
+  background: var(--field-hover);
+}
+.copied {
+  color: var(--ok);
+}
+
+/* ---------- Timer ---------- */
+.timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 99px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--ink-50);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+}
+.timer svg {
+  width: 15px;
+  height: 15px;
+}
+.timerUrgent {
+  color: var(--bad);
+  background: var(--bad-soft);
+  box-shadow: none;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  50% {
+    box-shadow: 0 0 0 5px rgba(207, 58, 47, 0.1);
+  }
+}

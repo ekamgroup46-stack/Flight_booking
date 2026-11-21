@@ -1,0 +1,109 @@
+.fleet {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--hairline-strong);
+  border-left: 1px solid var(--hairline);
+}
+.car {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 24px;
+  border-right: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  transition: background var(--t);
+}
+.car:hover {
+  background: var(--white);
+}
+.carTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.carName {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+.eco {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 99px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--ok);
+  background: var(--ok-soft);
+}
+.eco svg {
+  width: 13px;
+  height: 13px;
+}
+.model {
+  font-size: 13.5px;
+  color: var(--text-3);
+}
+.specs {
+  display: flex;
+  gap: 24px;
+  margin: 18px 0 8px;
+}
+.specs dt {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.specs dd {
+  margin: 2px 0 0;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+.note {
+  font-size: 13.5px;
+  color: var(--text-2);
+}
+.airports {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+.airport {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--white);
+  box-shadow: var(--sh-1);
+  transition:
+    transform var(--t) var(--ease),
+    box-shadow var(--t);
+}
+.airport:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1.5px var(--accent),
+    var(--sh-2);
+}
+.airport b {
+  font-size: 18px;
+}
+.airport span {
+  font-size: 13px;
+  color: var(--text-3);
+}
+@media (max-width: 900px) {
+  .fleet {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 560px) {
+  .fleet {
+    grid-template-columns: 1fr;
+  }
+}

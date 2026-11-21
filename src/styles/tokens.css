@@ -1,0 +1,158 @@
+/* ==========================================================================
+   Ekam design tokens — dark glass edition
+   Concept: transit wayfinding over one fixed flight photograph. Every surface
+   is frosted glass with a specular top edge; each service owns one "line"
+   colour, used sparingly like a metro map. No opaque white backgrounds.
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+
+  /* Ink — the deep tones (used for dark panels and text on bright controls) */
+  --ink-950: #060a13;
+  --ink-900: #0b1220;
+  --ink-850: #0f1829;
+  --ink-800: #152034;
+  /* The light end of the ramp is translucent white, so hovers, borders and muted
+     text automatically read correctly on glass. */
+  --ink-700: rgba(255, 255, 255, 0.82);
+  --ink-600: rgba(255, 255, 255, 0.74);
+  --ink-500: rgba(255, 255, 255, 0.62);
+  --ink-400: rgba(255, 255, 255, 0.5);
+  --ink-300: rgba(255, 255, 255, 0.36);
+  --ink-200: rgba(255, 255, 255, 0.22);
+  --ink-150: rgba(255, 255, 255, 0.14);
+  --ink-100: rgba(255, 255, 255, 0.1);
+  --ink-50: rgba(255, 255, 255, 0.06);
+
+  /* "Paper" is now a whisper of glass */
+  --paper: rgba(255, 255, 255, 0.05);
+  --paper-deep: rgba(255, 255, 255, 0.08);
+  --paper-edge: rgba(255, 255, 255, 0.14);
+  --white: rgba(255, 255, 255, 0.08);
+
+  /* Brand signal (logo dot, live indicators) */
+  --saffron: #ff7a35;
+  --saffron-deep: #ff9a62;
+
+  /* Service lines */
+  --line-flights: #2f6bff;
+  --line-trains: #e4473b;
+  --line-buses: #0e9f6e;
+  --line-cabs: #ffc21a;
+  --line-cargo: #7b5cff;
+
+  /* Semantic — tuned to read on dark glass */
+  --ok: #4fd6a2;
+  --ok-soft: rgba(79, 214, 162, 0.14);
+  --warn: #ffcb6b;
+  --warn-soft: rgba(255, 203, 107, 0.14);
+  --bad: #ff8a80;
+  --bad-soft: rgba(255, 138, 128, 0.14);
+
+  /* Surfaces & text */
+  --bg: var(--ink-950);
+  --surface: linear-gradient(180deg, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.07) 60%, rgba(255, 255, 255, 0.05) 100%);
+  --surface-solid: rgba(16, 23, 39, 0.94);
+  --surface-sunk: rgba(0, 0, 0, 0.18);
+  --field: rgba(255, 255, 255, 0.08);
+  --field-hover: rgba(255, 255, 255, 0.12);
+  --text: #f4f2ed;
+  --text-2: rgba(244, 242, 237, 0.74);
+  --text-3: rgba(244, 242, 237, 0.52);
+  --hairline: rgba(255, 255, 255, 0.1);
+  --hairline-strong: rgba(255, 255, 255, 0.18);
+  --focus: #8fb0ff;
+
+  /* Accent — neutral by default, re-pointed per service via [data-service] */
+  --accent: #ffffff;
+  --accent-ink: var(--ink-900);
+  --accent-soft: rgba(255, 255, 255, 0.12);
+  --accent-text: #ffffff;
+  --accent-glow: rgba(255, 255, 255, 0.3);
+
+  /* Type */
+  --font-sans: 'Geist Variable', 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    sans-serif;
+  --font-serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --font-mono: 'Geist Mono Variable', 'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas,
+    monospace;
+
+  /* Radii — rounded, never bubbly */
+  --r-xs: 6px;
+  --r-sm: 9px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 22px;
+  --r-pill: 999px;
+
+  /* Elevation — glass edges: a specular top line, a faint rim and a deep soft shadow */
+  --sh-1: inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 0 0 1px rgba(255, 255, 255, 0.07), 0 10px 26px -16px rgba(0, 0, 0, 0.6);
+  --sh-2: inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 18px 40px -18px rgba(0, 0, 0, 0.65);
+  --sh-3: inset 0 1px 0 rgba(255, 255, 255, 0.22), inset 0 0 0 1px rgba(255, 255, 255, 0.09), 0 30px 60px -22px rgba(0, 0, 0, 0.7);
+  --sh-4: 0 44px 90px -28px rgba(0, 0, 0, 0.75), 0 14px 30px -14px rgba(0, 0, 0, 0.5);
+
+  /* Glass content sheet that slides over the fixed backdrop */
+  --sheet-bg: linear-gradient(180deg, rgba(14, 20, 34, 0.42) 0px, rgba(10, 15, 27, 0.55) 520px, rgba(8, 12, 22, 0.62) 100%);
+  --sheet-radius: 40px;
+
+  /* Glass */
+  --glass-blur: 22px;
+  --glass-light: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+  --glass-dark: linear-gradient(180deg, rgba(24, 33, 54, 0.56), rgba(11, 18, 32, 0.46));
+  --glass-edge: rgba(255, 255, 255, 0.24);
+  --glass-edge-dark: rgba(255, 255, 255, 0.16);
+  --glass-sheen: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  /* Popovers, menus and dialogs: denser glass so content behind can't compete */
+  --glass-pop: linear-gradient(180deg, rgba(28, 37, 58, 0.94), rgba(15, 21, 36, 0.94));
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+  --t-fast: 140ms;
+  --t: 240ms;
+  --t-slow: 560ms;
+
+  /* Layout — content spans the viewport with a fluid side gap:
+     exactly 10% per side from 1280px up, easing down to 20px on phones (continuous, no jumps). */
+  --gutter: clamp(20px, 15vw - 64px, 10vw);
+  --nav-h: 72px;
+  --bottom-nav-h: 0px;
+}
+
+/* Per-service accents: soft tints are translucent, text tints are light enough for dark glass */
+[data-service='flights'] {
+  --accent: var(--line-flights);
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(47, 107, 255, 0.2);
+  --accent-text: #9dbbff;
+  --accent-glow: rgba(47, 107, 255, 0.55);
+}
+[data-service='trains'] {
+  --accent: var(--line-trains);
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(228, 71, 59, 0.2);
+  --accent-text: #ff9d94;
+  --accent-glow: rgba(228, 71, 59, 0.5);
+}
+[data-service='buses'] {
+  --accent: var(--line-buses);
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(14, 159, 110, 0.22);
+  --accent-text: #6be3b5;
+  --accent-glow: rgba(14, 159, 110, 0.5);
+}
+[data-service='cabs'] {
+  --accent: var(--line-cabs);
+  --accent-ink: #1d1600;
+  --accent-soft: rgba(255, 194, 26, 0.18);
+  --accent-text: #ffd65c;
+  --accent-glow: rgba(255, 194, 26, 0.5);
+}
+[data-service='cargo'] {
+  --accent: var(--line-cargo);
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(123, 92, 255, 0.22);
+  --accent-text: #bba9ff;
+  --accent-glow: rgba(123, 92, 255, 0.55);
+}

@@ -1,0 +1,52 @@
+.wrap {
+  padding: clamp(64px, 10vw, 140px) 0 40px;
+  text-align: center;
+}
+.board {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 26px 30px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #111a2c, #0a101d);
+  box-shadow: var(--sh-3);
+}
+.boardRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ffd27a;
+}
+.flapBig {
+  font-size: 44px;
+}
+.flap {
+  font-size: 18px;
+}
+.title {
+  margin-top: 48px;
+  font-size: clamp(36px, 5vw, 68px);
+  font-weight: 560;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+.body {
+  max-width: 520px;
+  margin: 18px auto 0;
+  font-size: 17px;
+  color: var(--text-2);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+}

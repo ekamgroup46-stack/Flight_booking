@@ -1,0 +1,48 @@
+.section {
+  padding: clamp(72px, 9vw, 120px) 0 0;
+}
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(32px, 6vw, 96px);
+}
+.head {
+  display: block !important;
+  margin-bottom: 28px !important;
+}
+.help {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px;
+  border-radius: var(--r-lg);
+  background: var(--white);
+  box-shadow: var(--sh-1);
+}
+.help p {
+  font-size: 14px;
+  color: var(--text-2);
+}
+.help a:first-of-type {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+.help a:last-of-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 550;
+  color: var(--accent-text);
+}
+.help svg {
+  width: 15px;
+  height: 15px;
+}
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

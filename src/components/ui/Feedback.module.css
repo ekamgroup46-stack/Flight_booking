@@ -1,0 +1,161 @@
+.skeleton {
+  display: block;
+  background: linear-gradient(90deg, var(--ink-100) 0%, var(--ink-50) 40%, var(--ink-100) 80%);
+  background-size: 300% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -50% 0;
+  }
+}
+
+.spinner {
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid var(--ink-150);
+  border-top-color: var(--accent);
+  animation: spin 0.75s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 56px 24px;
+  border-radius: var(--r-xl);
+  background: var(--surface);
+  box-shadow: var(--sh-1);
+}
+.compact {
+  padding: 32px 20px;
+  box-shadow: none;
+  background: transparent;
+}
+.endLine {
+  width: 180px;
+  height: auto;
+  margin-bottom: 22px;
+}
+.stateTitle {
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+.stateBody {
+  max-width: 420px;
+  margin-top: 8px;
+  font-size: 15px;
+  color: var(--text-2);
+}
+.stateAction {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+.errorIcon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  background: var(--bad-soft);
+  color: var(--bad);
+}
+.errorIcon svg {
+  width: 26px;
+  height: 26px;
+}
+
+/* ---------- Toasts ---------- */
+.toaster {
+  position: fixed;
+  z-index: 300;
+  right: 20px;
+  bottom: 88px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(380px, calc(100vw - 32px));
+  pointer-events: none;
+}
+@media (max-width: 640px) {
+  .toaster {
+    left: 16px;
+    right: 16px;
+    bottom: 74px;
+    width: auto;
+  }
+}
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 14px 14px 16px;
+  border-radius: var(--r-lg);
+  color: #fff;
+  background: rgba(15, 23, 40, 0.92);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  backdrop-filter: blur(18px) saturate(150%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 24px 48px -18px rgba(6, 10, 19, 0.6);
+  animation: toastIn 360ms var(--ease);
+}
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+}
+.toastIcon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+}
+.success .toastIcon {
+  color: #4fd1a1;
+}
+.error .toastIcon {
+  color: #ff8a80;
+}
+.info .toastIcon {
+  color: #8fb3ff;
+}
+.toastText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 14px;
+}
+.toastText span {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+}
+.toastClose {
+  color: rgba(255, 255, 255, 0.5);
+  padding: 2px;
+  border-radius: 6px;
+}
+.toastClose:hover {
+  color: #fff;
+}
+.toastClose svg {
+  width: 16px;
+  height: 16px;
+}

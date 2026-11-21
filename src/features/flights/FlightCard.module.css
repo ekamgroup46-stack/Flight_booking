@@ -1,0 +1,287 @@
+.card {
+  border-radius: var(--r-xl);
+  background: var(--surface);
+  box-shadow: var(--sh-1);
+  transition:
+    box-shadow var(--t) var(--ease),
+    transform var(--t) var(--ease);
+  animation: cardIn 480ms var(--ease) both;
+}
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+.card:hover {
+  box-shadow:
+    0 0 0 1px var(--hairline-strong),
+    var(--sh-2);
+}
+.open {
+  box-shadow:
+    0 0 0 1.5px var(--accent),
+    var(--sh-3);
+}
+.row {
+  display: grid;
+  grid-template-columns: minmax(170px, 0.9fr) minmax(0, 1.6fr) auto;
+  align-items: center;
+  gap: 28px;
+  padding: 20px 22px 12px;
+}
+.airline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.airline strong {
+  display: block;
+  font-size: 15px;
+  letter-spacing: -0.015em;
+}
+.airline > div > span {
+  font-size: 12px;
+  color: var(--text-3);
+}
+.journey {
+  display: grid;
+  grid-template-columns: auto minmax(90px, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+}
+.end {
+  display: flex;
+  flex-direction: column;
+}
+.end b {
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+.end sup {
+  margin-left: 2px;
+  font-size: 11px;
+  color: var(--bad);
+}
+.end span {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--text-3);
+}
+.endRight {
+  text-align: right;
+}
+.line {
+  padding-bottom: 12px;
+}
+.priceCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+.price {
+  font-size: 24px;
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+.per {
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: var(--text-3);
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  padding: 10px 22px 16px;
+  border-top: 1px dashed var(--ink-150);
+  margin: 0 0 0;
+}
+.fact {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  color: var(--text-3);
+}
+.fact svg {
+  width: 14px;
+  height: 14px;
+}
+.expand {
+  padding: 0 22px 22px;
+  border-top: 1px solid var(--hairline);
+  animation: cardIn 360ms var(--ease);
+}
+.fares {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+.fare {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  border-radius: 18px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--hairline);
+}
+.fareRec {
+  background: var(--surface);
+  box-shadow:
+    inset 0 0 0 1.5px var(--accent),
+    0 12px 30px -18px var(--accent-glow);
+}
+.rec {
+  position: absolute;
+  top: -10px;
+  left: 18px;
+  padding: 2px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent);
+}
+.fareHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.fareHead strong {
+  font-size: 16px;
+}
+.farePrice {
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+}
+.fareList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  font-size: 13.5px;
+  color: var(--text-2);
+}
+.fareList li {
+  display: flex;
+  gap: 8px;
+  line-height: 1.4;
+}
+.fareList svg {
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  margin-top: 1px;
+  color: var(--ok);
+}
+.fareList .no {
+  color: var(--ink-300);
+}
+.fareTotal {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-3);
+}
+.legs {
+  margin-top: 18px;
+}
+.leg {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-left: 28px;
+}
+.legRail {
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  border-radius: 3px;
+  background: var(--accent);
+}
+.legRail::before,
+.legRail::after {
+  content: '';
+  position: absolute;
+  left: -5px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #0d1424;
+  box-shadow: inset 0 0 0 3px var(--accent);
+}
+.legRail::before {
+  top: -6px;
+}
+.legRail::after {
+  bottom: -6px;
+  background: var(--accent);
+}
+.legStop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+.legStop b {
+  font-size: 17px;
+}
+.legStop span {
+  font-size: 14px;
+}
+.legStop em {
+  font-style: normal;
+  font-size: 12.5px;
+  color: var(--text-3);
+}
+.legMid {
+  font-size: 13px;
+  color: var(--text-3);
+}
+.layover {
+  margin: 14px 0 14px 28px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+  color: var(--warn);
+  background: var(--warn-soft);
+}
+@media (max-width: 900px) {
+  .row {
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+  }
+  .journey {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .priceCol {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .fares {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 480px) {
+  .end b {
+    font-size: 19px;
+  }
+  .row,
+  .tags,
+  .expand {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

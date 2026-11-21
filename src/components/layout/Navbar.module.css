@@ -1,0 +1,463 @@
+.nav {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-h);
+  transition:
+    background-color var(--t) var(--ease),
+    box-shadow var(--t) var(--ease),
+    color var(--t) var(--ease);
+}
+.transparent {
+  color: #fff;
+  background: linear-gradient(180deg, rgba(6, 10, 19, 0.45), rgba(6, 10, 19, 0));
+}
+.solid {
+  color: var(--text);
+  background: rgba(8, 12, 22, 0.55);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  box-shadow:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+    0 14px 34px -24px rgba(0, 0, 0, 0.7);
+}
+
+.menuMode {
+  color: #fff;
+  background: var(--ink-950);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 100%;
+}
+.brand {
+  display: inline-flex;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+/* Service links live in their own glossy glass capsule */
+.services {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0 auto;
+  padding: 5px;
+  border-radius: var(--r-pill);
+  isolation: isolate;
+  /* Floats slightly below the logo/profile line, like an island */
+  translate: 0 12px;
+  transition:
+    background var(--t) var(--ease),
+    box-shadow var(--t) var(--ease);
+}
+/* Specular highlight across the top half — the "gloss" */
+.services::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 1px 1px 52% 1px;
+  border-radius: 999px 999px 18px 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+.transparent .services {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.17), rgba(255, 255, 255, 0.06));
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+  backdrop-filter: blur(18px) saturate(170%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+    0 14px 34px -16px rgba(0, 0, 0, 0.5);
+}
+.solid .services {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    0 14px 34px -16px rgba(0, 0, 0, 0.6);
+}
+.solid .services::before {
+  opacity: 0.7;
+}
+.services .link {
+  height: 36px;
+  padding: 0 14px;
+  border-radius: var(--r-pill);
+}
+.transparent .services .link:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+.solid .services .link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+/* Active service: a raised glossy chip instead of an underline */
+.services .active::after {
+  display: none;
+}
+.transparent .services .active {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.12));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.22),
+    0 6px 14px -8px rgba(0, 0, 0, 0.5);
+}
+.solid .services .active {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.12));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.22),
+    0 6px 14px -8px rgba(0, 0, 0, 0.5);
+}
+.right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+.services + .right {
+  margin-left: 0;
+}
+
+.link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 10px;
+  font-size: 14.5px;
+  font-weight: 520;
+  letter-spacing: -0.01em;
+  opacity: 0.86;
+  transition:
+    opacity var(--t-fast),
+    background-color var(--t-fast);
+}
+.link:hover {
+  opacity: 1;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+.active {
+  opacity: 1;
+  font-weight: 600;
+}
+.active::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 2px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--line, currentColor);
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--line) 25%, transparent);
+}
+.divider {
+  width: 1px;
+  height: 18px;
+  margin: 0 8px;
+  background: currentColor;
+  opacity: 0.18;
+}
+.new {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 99px;
+  color: #1d1600;
+  background: var(--line-cabs);
+}
+
+/* Account — a single glossy profile button */
+.account {
+  position: relative;
+}
+.profileBtn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  isolation: isolate;
+  transition:
+    transform var(--t) var(--ease),
+    box-shadow var(--t) var(--ease),
+    background var(--t) var(--ease);
+}
+.profileBtn::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 1px 1px 52% 1px;
+  border-radius: 999px 999px 12px 12px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+.profileBtn > svg {
+  width: 20px;
+  height: 20px;
+}
+.profileBtn:hover {
+  transform: translateY(-1px);
+}
+.transparent .profileBtn,
+.menuMode .profileBtn {
+  color: #fff;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.17), rgba(255, 255, 255, 0.06));
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+  backdrop-filter: blur(18px) saturate(170%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+    0 14px 34px -16px rgba(0, 0, 0, 0.5);
+}
+.solid .profileBtn {
+  color: #fff;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.17), rgba(255, 255, 255, 0.06));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+    0 14px 34px -16px rgba(0, 0, 0, 0.5);
+}
+.profileUser {
+  padding: 4px;
+}
+.profileOpen {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 0 0 2px rgba(255, 255, 255, 0.55),
+    0 14px 34px -16px rgba(0, 0, 0, 0.5) !important;
+}
+.solid .profileOpen {
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.55),
+    0 10px 24px -14px rgba(11, 18, 32, 0.35) !important;
+}
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 650;
+  color: #fff;
+  background: linear-gradient(135deg, #2f6bff, #7b5cff);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+.menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 12px);
+  width: 270px;
+  padding: 6px;
+  border-radius: 20px;
+  color: var(--text);
+  background: var(--glass-pop);
+  -webkit-backdrop-filter: blur(22px) saturate(170%);
+  backdrop-filter: blur(22px) saturate(170%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 28px 60px -22px rgba(0, 0, 0, 0.7);
+  transform-origin: top right;
+  animation: pop 220ms var(--ease);
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+}
+.menuHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 10px 14px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--hairline);
+}
+.menuAvatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 650;
+  color: #fff;
+  background: linear-gradient(135deg, #2f6bff, #7b5cff);
+}
+.menuAvatar svg {
+  width: 20px;
+  height: 20px;
+}
+.menuHead span:last-child {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.menuHead strong {
+  font-size: 14.5px;
+}
+.menuHead em {
+  overflow: hidden;
+  font-style: normal;
+  font-size: 12.5px;
+  color: var(--text-3);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 12px;
+  font-size: 14.5px;
+  font-weight: 520;
+  text-align: left;
+  transition: background var(--t-fast);
+}
+.menuItem:hover,
+.menuItem:focus-visible {
+  background: var(--ink-50);
+}
+.menuItem svg {
+  width: 18px;
+  height: 18px;
+  color: var(--text-3);
+}
+.menuRule {
+  display: block;
+  height: 1px;
+  margin: 4px 8px;
+  background: var(--hairline);
+}
+.menuLogout,
+.menuLogout svg {
+  color: var(--bad);
+}
+.menuLogout:hover {
+  background: var(--bad-soft);
+}
+
+.burger {
+  display: none;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+}
+.burger svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Mobile sheet */
+.sheet {
+  position: fixed;
+  z-index: 99;
+  inset: var(--nav-h) 0 0;
+  overflow-y: auto;
+  padding: 12px 0 40px;
+  color: #fff;
+  background: radial-gradient(120% 60% at 100% 0%, rgba(47, 107, 255, 0.25), transparent 60%), var(--ink-950);
+  animation: sheetIn 300ms var(--ease);
+}
+@keyframes sheetIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+.sheetEyebrow {
+  margin: 8px 0 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+.lines {
+  display: flex;
+  flex-direction: column;
+}
+.lineRow {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.lineRow strong {
+  display: block;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+.lineRow em {
+  font-style: normal;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+}
+.lineRow > svg {
+  width: 20px;
+  height: 20px;
+  opacity: 0.5;
+}
+.sheetLinks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 16px;
+  margin-top: 24px;
+}
+.sheetLinks a {
+  padding: 10px 0;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.8);
+}
+.sheetBundle {
+  margin-top: 36px;
+}
+
+@media (max-width: 1079px) {
+  .services {
+    display: none;
+  }
+  .burger {
+    display: grid;
+  }
+  .right {
+    margin-left: auto !important;
+  }
+}
+@media (max-width: 560px) {
+  .profileBtn {
+    width: 40px;
+    height: 40px;
+  }
+}

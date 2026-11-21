@@ -1,0 +1,94 @@
+/* ---------- Fixed backdrop ---------- */
+.backdrop {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  background: var(--ink-950);
+  pointer-events: none;
+}
+.backdrop img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 62%;
+}
+.sharp {
+  animation: settle 2.4s var(--ease) both;
+}
+@keyframes settle {
+  from {
+    scale: 1.07;
+  }
+}
+/* Pre-blurred copy: rendered once (the layer never moves), faded in with --sink. */
+.soft {
+  filter: blur(30px) saturate(1.3) brightness(0.9);
+  transform: scale(1.12);
+  opacity: var(--sink, 0);
+  transition: opacity 420ms var(--ease);
+}
+.tint {
+  position: absolute;
+  inset: 0;
+  background: rgb(6 10 19 / calc(0.08 + var(--sink, 0) * 0.22));
+  transition: background-color 420ms var(--ease);
+}
+/* Warm ambient light from the sunset side of the photo */
+.glow {
+  position: absolute;
+  right: -10%;
+  top: 20%;
+  width: 70vw;
+  height: 70vw;
+  max-width: 1100px;
+  max-height: 1100px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 168, 108, 0.22), transparent 70%);
+  mix-blend-mode: screen;
+}
+
+/* ---------- Glass content sheet ---------- */
+.sheet {
+  position: relative;
+  z-index: 1;
+  padding-bottom: clamp(72px, 9vw, 128px);
+  border-radius: var(--sheet-radius) var(--sheet-radius) 0 0;
+  background: var(--sheet-bg);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.28),
+    0 -28px 70px -26px rgba(3, 6, 14, 0.55);
+  isolation: isolate;
+  /* Keeps page-level glows inside the rounded edge; clip (not hidden) so sticky still works. */
+  overflow: clip;
+}
+/* Specular gloss across the leading edge of the sheet */
+.sheet::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 auto 0;
+  height: 260px;
+  border-radius: inherit;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0) 100%),
+    linear-gradient(100deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.35) 50%, rgba(255, 255, 255, 0) 70%);
+  /* Feather the gloss out so it never ends in a visible edge */
+  -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 30%, transparent 100%);
+  pointer-events: none;
+}
+@media (max-width: 640px) {
+  .sheet {
+    border-radius: 26px 26px 0 0;
+  }
+}
+@media print {
+  .sheet {
+    background: #fff;
+    box-shadow: none;
+  }
+}

@@ -1,0 +1,188 @@
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: var(--r-md);
+  font-size: 15px;
+  font-weight: 550;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  user-select: none;
+  isolation: isolate;
+  transition:
+    transform var(--t-fast) var(--ease),
+    box-shadow var(--t) var(--ease),
+    background-color var(--t) var(--ease),
+    color var(--t) var(--ease),
+    filter var(--t) var(--ease);
+}
+.btn:active:not(:disabled) {
+  transform: translateY(1px) scale(0.99);
+}
+.btn:disabled {
+  opacity: 0.5;
+}
+
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+.icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.sm {
+  height: 36px;
+  padding: 0 13px;
+  font-size: 14px;
+  border-radius: 10px;
+  gap: 6px;
+}
+.sm .icon svg {
+  width: 16px;
+  height: 16px;
+}
+.lg {
+  height: 54px;
+  padding: 0 24px;
+  font-size: 16px;
+  border-radius: 14px;
+}
+.block {
+  width: 100%;
+}
+
+/* The one bright control: glossy pearl, so primary CTAs still pop on dark glass */
+.primary {
+  color: var(--ink-900);
+  background: linear-gradient(180deg, #ffffff 0%, #e9edf5 100%);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 0 -1px 0 rgba(11, 18, 32, 0.12),
+    0 12px 26px -14px rgba(0, 0, 0, 0.7);
+}
+.primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 0 -1px 0 rgba(11, 18, 32, 0.12),
+    0 18px 32px -14px rgba(0, 0, 0, 0.75),
+    0 0 0 4px rgba(255, 255, 255, 0.08);
+}
+
+/* Service-line accent with a glossy top sheen */
+.accent {
+  color: var(--accent-ink);
+  background-color: var(--accent);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.04) 52%, rgba(0, 0, 0, 0.04) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(11, 18, 32, 0.18),
+    0 12px 26px -14px var(--accent-glow);
+}
+.accent:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.04) saturate(1.05);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(11, 18, 32, 0.18),
+    0 20px 34px -14px var(--accent-glow);
+}
+
+.secondary {
+  color: var(--text);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.07));
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(150%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    inset 0 0 0 1px var(--hairline-strong),
+    0 8px 18px -12px rgba(0, 0, 0, 0.6);
+}
+.secondary:hover:not(:disabled) {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.1));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 0 0 1px var(--ink-300),
+    0 10px 22px -12px rgba(0, 0, 0, 0.65);
+}
+
+.ghost {
+  color: var(--text);
+}
+.ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.glass {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(150%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+.glass:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.danger {
+  color: #fff;
+  background: linear-gradient(180deg, #e04c41, #c4352b);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 10px 22px -12px rgba(207, 58, 47, 0.7);
+}
+
+.link {
+  height: auto;
+  padding: 0;
+  border-radius: 4px;
+  color: var(--accent-text);
+  font-weight: 550;
+}
+.link:hover:not(:disabled) {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.iconOnly {
+  width: 44px;
+  padding: 0;
+}
+.iconOnly.sm {
+  width: 36px;
+}
+.iconOnly svg {
+  width: 19px;
+  height: 19px;
+}
+
+.loading .label,
+.loading .icon {
+  opacity: 0;
+}
+.spinner {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

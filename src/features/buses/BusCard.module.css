@@ -1,0 +1,250 @@
+.card {
+  border-radius: var(--r-xl);
+  background: var(--surface);
+  box-shadow: var(--sh-1);
+  animation: cardIn 480ms var(--ease) both;
+  transition: box-shadow var(--t);
+}
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+.card:hover {
+  box-shadow:
+    0 0 0 1px var(--hairline-strong),
+    var(--sh-2);
+}
+.open {
+  box-shadow:
+    0 0 0 1.5px var(--accent),
+    var(--sh-3);
+}
+.row {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(0, 1.25fr) auto;
+  align-items: center;
+  gap: 26px;
+  padding: 20px 22px 14px;
+}
+.opTop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.opTop strong {
+  font-size: 16px;
+  letter-spacing: -0.02em;
+}
+.type {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--text-2);
+}
+.amen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  color: var(--text-3);
+}
+.amen span {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--ink-50);
+}
+.amen svg {
+  width: 14px;
+  height: 14px;
+}
+.journey {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(80px, 1fr) minmax(0, auto);
+  align-items: center;
+  gap: 16px;
+}
+.end {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 150px;
+}
+.end b {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+.end sup {
+  font-size: 11px;
+  color: var(--bad);
+}
+.end span {
+  overflow: hidden;
+  font-size: 12.5px;
+  color: var(--text-3);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.right {
+  text-align: right;
+}
+.priceCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.from {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.price {
+  font-size: 24px;
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+.left {
+  margin-bottom: 8px;
+  font-size: 12.5px;
+  color: var(--text-3);
+}
+.leftLow {
+  color: var(--bad);
+  font-weight: 600;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  padding: 10px 22px 16px;
+  border-top: 1px dashed var(--ink-150);
+}
+.policy {
+  font-size: 12.5px;
+  color: var(--text-3);
+}
+.panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 24px;
+  padding: 22px;
+  border-top: 1px solid var(--hairline);
+  background: rgba(0, 0, 0, 0.16);
+  border-radius: 0 0 var(--r-xl) var(--r-xl);
+  animation: cardIn 360ms var(--ease);
+}
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.points {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.points legend {
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.point {
+  display: grid;
+  grid-template-columns: auto 48px 1fr;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px var(--hairline);
+  background: var(--field);
+}
+.point input {
+  accent-color: var(--accent);
+}
+.pointOn {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+  background: var(--accent-soft);
+}
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--sh-1);
+}
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+}
+.summaryRow span {
+  color: var(--text-3);
+}
+.total {
+  font-size: 20px;
+  letter-spacing: -0.03em;
+}
+.ladiesNote {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  color: #b0336f;
+  background: #fdf0f6;
+}
+@media (max-width: 980px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .journey {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .panel {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    padding: 16px 16px 12px;
+  }
+  .journey {
+    grid-row: auto;
+  }
+  .priceCol {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px 10px;
+  }
+  .from {
+    display: none;
+  }
+  .left {
+    margin: 0 auto 0 0;
+  }
+  .tags {
+    padding: 10px 16px 14px;
+  }
+  .panel {
+    padding: 14px;
+  }
+}

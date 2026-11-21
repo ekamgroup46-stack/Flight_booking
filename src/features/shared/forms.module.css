@@ -1,0 +1,69 @@
+.optLabel,
+.optLabelDark {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.optLabelDark {
+  color: rgba(255, 255, 255, 0.6);
+}
+.chipDark {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2) !important;
+}
+.chipDark:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+}
+.optLink,
+.optLinkDark {
+  margin-left: auto;
+  font-size: 13.5px;
+  font-weight: 550;
+  color: var(--accent-text);
+}
+.optLinkDark {
+  color: rgba(255, 255, 255, 0.85);
+}
+.optLink:hover,
+.optLinkDark:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.dims {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: 13.5px;
+}
+.dimsDark {
+  color: rgba(255, 255, 255, 0.8);
+}
+.dimInput {
+  width: 84px;
+  height: 38px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--field);
+  box-shadow: inset 0 0 0 1px var(--hairline-strong);
+  font-size: 14px;
+  color: var(--text);
+}
+.dimInput:focus {
+  outline: 0;
+  box-shadow:
+    inset 0 0 0 1.5px var(--accent),
+    0 0 0 3px var(--accent-soft);
+}
+.dimsToggle {
+  font-size: 13.5px;
+  font-weight: 550;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

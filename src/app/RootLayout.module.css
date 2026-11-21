@@ -1,0 +1,78 @@
+.offset {
+  padding-top: var(--nav-h);
+}
+/* Non-hero pages: the sheet floats just under the nav with a sliver of backdrop showing. */
+.sheetPage {
+  min-height: calc(100vh - var(--nav-h) - 14px);
+  margin-top: 14px;
+}
+.progress {
+  position: fixed;
+  z-index: 500;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.progress > span {
+  flex-direction: column;
+}
+
+/* Page enter: content rises out of a soft blur. Exit is instant so navigation never feels slow. */
+.page {
+  animation: pageIn 760ms var(--ease) both;
+}
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(8px);
+  }
+  60% {
+    filter: blur(0);
+  }
+}
+
+/* Line sweep under the nav on route change */
+.sweep {
+  position: fixed;
+  z-index: 102;
+  top: var(--nav-h);
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  transform-origin: left;
+  animation: sweep 1100ms var(--ease-io) both;
+}
+@keyframes sweep {
+  0% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  55% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
+.boot {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+.bootBundle {
+  width: 120px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page,
+  .sweep {
+    animation: none;
+  }
+  .sweep {
+    display: none;
+  }
+}

@@ -1,0 +1,154 @@
+.wrap {
+  width: 100%;
+}
+.ticket {
+  display: grid;
+  grid-template-columns: 71% 29%;
+  overflow: hidden;
+}
+.main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  padding: 26px 28px 24px;
+}
+.stripe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: var(--accent);
+}
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.service {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+.route {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(90px, 1fr) minmax(0, auto);
+  align-items: center;
+  gap: 18px;
+}
+.code {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.place {
+  display: block;
+  max-width: 200px;
+  margin-top: 6px;
+  overflow: hidden;
+  font-size: 13.5px;
+  font-weight: 550;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.time {
+  font-size: 12.5px;
+  color: var(--text-3);
+}
+.right {
+  text-align: right;
+}
+.right .place {
+  margin-left: auto;
+}
+.line {
+  padding-bottom: 12px;
+}
+.meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 18px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--ink-150);
+}
+.meta dt {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.meta dd {
+  margin: 2px 0 0;
+  font-size: 13.5px;
+  font-weight: 550;
+}
+.people {
+  display: flex;
+  gap: 14px;
+  font-size: 13.5px;
+}
+.people > span {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  padding-top: 3px;
+}
+.people ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  font-weight: 550;
+}
+.stub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px 14px;
+  text-align: center;
+  background: repeating-linear-gradient(135deg, rgba(11, 18, 32, 0.02) 0 6px, transparent 6px 12px);
+}
+.refLabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.ref {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  letter-spacing: 0.04em;
+  word-break: break-all;
+}
+.bid {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-3);
+}
+@media (max-width: 720px) {
+  .ticket {
+    grid-template-columns: 1fr;
+  }
+  .stub {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-top: 2px dashed var(--ink-150);
+  }
+  .meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .main {
+    padding: 22px 18px;
+  }
+}
